@@ -15,6 +15,7 @@ class MainWindow(QMainWindow):
         self.bookmarks = []  # Initialize bookmarks as list of tuples (display_name, url)
         self.default_search_engine = "https://www.google.com/search?q="  # Default search engine
         self.home_page = "http://www.google.com"  # Default home page
+        self.youtube_url = "https://www.youtube.com"  # YouTube URL
         self.tabs = QTabWidget()
         self.tabs.setTabsClosable(True)  # Enable close button on tabs
         self.tabs.tabCloseRequested.connect(self.close_current_tab)
@@ -78,6 +79,11 @@ class MainWindow(QMainWindow):
         home_btn.setStatusTip("Go home")
         home_btn.triggered.connect(lambda: self.current_browser().setUrl(QUrl(self.home_page)))
         navtb.addAction(home_btn)
+
+        youtube_btn = QAction("YouTube", self)
+        youtube_btn.setStatusTip("Open YouTube")
+        youtube_btn.triggered.connect(lambda: self.current_browser().setUrl(QUrl(self.youtube_url)))
+        navtb.addAction(youtube_btn)
 
         history_btn = QAction("History", self)
         history_btn.setStatusTip("Show history")
@@ -309,3 +315,4 @@ app = QApplication(sys.argv)
 window = MainWindow()
 window.show()
 app.exec_()
+
